@@ -2,14 +2,20 @@
 
 {% block content %}
 
-
 {% if request.user.is_authenticated %}
-    <hr>
-    <h4>
-        {{ user.username | upper }}, bienvenido
-    </h4>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img src={{ user.profile.image.url }} class="card-img-top" alt="...">
+            <div class="card-body">
+                <h3 class="card-title text-primary">{{ user.first_name }} {{ user.last_name }}</h3>
+                <h5 class="card-title">@{{ user.username | upper }}</h5>
+                <p class="card-text mt-3">{{ user.profile.biografia }}</p>
+                <a href={% url 'logout' %} class="btn btn-sm btn-success">Cerrar Sesión</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
 {% endif %}
-
-
-
 {% endblock %}
