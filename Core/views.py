@@ -35,3 +35,7 @@ def register(request):
             return redirect('home')
 
     return render(request, 'registration/register.html', data)
+
+
+def aboutus(request):
+    return render(request, 'Core/aboutus.html')
