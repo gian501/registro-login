@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
+from .models import Producto
+#from Core.models import Producto
+#from Core.forms import ProductoFormulario
+
 
 # Create your views here.
 
@@ -11,13 +15,12 @@ def home(request):
 
 @login_required
 def products(request):
-    return render(request, 'Core/products.html')
+    producto = Producto.objects.all()
+    return render(request, 'Core/products.html', {'producto':producto})
 
 def exit(request):
     logout(request)
     return redirect('home')
-
-
 
 def register(request):
     data = {
@@ -39,3 +42,20 @@ def register(request):
 
 def aboutus(request):
     return render(request, 'Core/aboutus.html')
+
+'''def productos(request):
+    if request.method == "POST":
+ 
+        miFormulario = ProductoFormulario(request.POST) # Aqui me llega la informacion del html
+        print(miFormulario)
+ 
+        if miFormulario.is_valid:
+            informacion = miFormulario.cleaned_data
+            producto = Producto(nombre=informacion["producto"], precio=informacion["precio"], cantidad=informacion["Cantidad"],Imagen=informacion["Imagen"])
+            producto.save()
+            #return render(request, "AppE03/cursos.html") #ubicacion a donde me lleva
+            return render(request, "Core/home.html")
+    else:
+        miFormulario = ProductoFormulario()
+        
+    return render(request, 'Core/products.html', {"miFormulario":miFormulario})'''

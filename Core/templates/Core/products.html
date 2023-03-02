@@ -1,149 +1,91 @@
-{% extends 'Core/base.html' %}
-{% block content %}
-  <main class="px-3">
-  <section class="py-5 text-center">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-12 mx-auto">
-        <h1 class="fw-light">Listado de Productos</h1>
-      </div>
-    </div>
-  </section>
+<!DOCTYPE html>
+        <html lang="en">
+            <head>
+                {% load static %}
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+                <meta name="description" content="" />
+                <meta name="author" content="" />
+                <title>Grayscale - Start Bootstrap Theme</title>
+                <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+                <!-- Font Awesome icons (free version)-->
+                <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+                <!-- Google fonts-->
+                <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+                <!-- Core theme CSS (includes Bootstrap)-->
+                <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+            </head>
+            <body background="bg-signup.jpg" id="page-top">
+                <!-- Navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+                    <div class="container px-4 px-lg-5">
+                        <a class="navbar-brand" href="#page-top">GV-Paracord</a>
+                        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                            Menu
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item"><a class="nav-link" href={% url 'home' %}>Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href={% url 'aboutus' %}>About-Us</a></li>
+                                <li class="nav-item"><a class="nav-link" href={% url 'products' %}>Productos</a></li>
+                                {% if request.user.is_authenticated %}
+                                <li class="nav-item"><a class="nav-link" href={% url 'logout' %}>Salir</a></li>
+                                {% else %}
+                                <li class="nav-item"><a class="nav-link" href={% url 'login' %}>Ingresar</a></li>
+                                <li class="nav-item"><a class="nav-link" href={% url 'register' %}>Registrarse</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                {% block content %}
+                       <!-- Masthead-->
+                       <header  class="masthead">
+                        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center">
+                                <div class="text-center">
+                                    <h1 class="mx-auto my-0 text-uppercase"></h1>
+                                    <h2 class="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                <!--aca comienzan los productos-->
+                <section style="color: black;" class="py-5">
+                  <div class="row">
+                      {% for producto in producto%}
+                      <div class="row gx-4 gx-lg-5">
+                          <div class="card" style="width: 18rem;">
+                              <img src="{{ producto.imagen}}" class="card-img-top" alt="..."></img>
+                              <div class="card-body">
+                                  <h5 class="card-title">{{ producto.nombre}}</h5>
+                                  <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                  <p class="card-text">(${{producto.precio}})</p>
+                                  <a href="#" class="btn btn-primary">Agregar - al Carrito</a>
+                              </div>
+                            </div>
+                      </div>
+                  </div>
+                </section>
+                {% endfor %}
+                {% endblock %}
+                    <!-- Footer-->
+                    <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Your Website 2022</div></footer>
+                    <!-- Bootstrap core JS-->
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                    <!-- Core theme JS-->
+                    <script src="js/scripts.js"></script>
+                    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+                    <!-- * *                               SB Forms JS                               * *-->
+                    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+                    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+                    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+                </body>
+            </html>  
+         
+  
+     
+                      
 
-  <div class="album py-5 bg-dark">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </main>
-{% endblock %}
