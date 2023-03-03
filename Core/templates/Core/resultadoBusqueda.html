@@ -1,0 +1,21 @@
+
+
+<h2>Resultado:</h2>
+<p>Estamos buscando el producto: {{producto.nombre}}</p>
+
+{% if products %}
+
+<ul>
+ {% for curso in cursos %}
+     <li>Producto: {{producto.nombre}}</li>
+     <li>Precio: {{producto.precio}}</li>
+ {% endfor %}
+
+
+</ul>
+{% else %}
+<p>No hay datos con esa descripcion</p>
+
+{% endif %}
+
+<p style="color: red;">{{respuesta}}</p>

@@ -4,6 +4,10 @@ from django.contrib.auth import logout
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from .models import Producto
+from django.http import HttpResponse
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 #from Core.models import Producto
 #from Core.forms import ProductoFormulario
 
@@ -17,6 +21,31 @@ def home(request):
 def products(request):
     producto = Producto.objects.all()
     return render(request, 'Core/products.html', {'producto':producto})
+
+class ProductoList(ListView):
+    model = Producto
+    template_name = "Core/producto_list.html"
+    
+class ProductoDetalle(DetailView):
+    model = Producto
+    template_name = "Core/producto_detalle.html"
+    
+class ProductoCreacion(CreateView):
+    model = Producto
+    success_url = "/Core/producto/list"
+    fields = ['nombre', 'precio', 'cantidad', 'imagen']
+
+class ProductoUpdate(UpdateView):
+    model = Producto
+    success_url = "/Core/producto/list"
+    fields = ['nombre', 'precio', 'cantidad', 'imagen'] 
+    
+class ProductoDelete(DeleteView):
+    model = Producto
+    success_url = "/Core/producto/list"
+
+
+
 
 def exit(request):
     logout(request)
@@ -39,9 +68,27 @@ def register(request):
 
     return render(request, 'registration/register.html', data)
 
-
 def aboutus(request):
     return render(request, 'Core/aboutus.html')
+
+def busquedaProducto(request):
+    return render(request, "Core/busquedaProducto.html" )
+
+def buscar(request):
+    if request.GET['nombre']:
+        nombre = Producto.objects.filter(nombre__icontains=nombre)
+        return render(request, "Core/resultadoBusqueda.html", {"nombre":nombre})
+    else:
+        respuesta = "No enviaste datos"
+    
+    #return render(request, 'AppC/inicio.html',{"respuesta": respuesta})
+    return HttpResponse(respuesta)
+
+
+
+
+
+
 
 '''def productos(request):
     if request.method == "POST":
