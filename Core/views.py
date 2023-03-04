@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 #from Core.models import Producto
 #from Core.forms import ProductoFormulario
 
@@ -38,7 +39,7 @@ class ProductoCreacion(CreateView):
 class ProductoUpdate(UpdateView):
     model = Producto
     success_url = "/Core/producto/list"
-    fields = ['nombre', 'precio', 'cantidad', 'imagen'] 
+    fields = ['nombre', 'precio', 'cantidad', 'imagen']
     
 class ProductoDelete(DeleteView):
     model = Producto

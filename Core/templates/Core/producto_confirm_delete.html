@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'Core/base.html' %}
+
+{% block content %}
     <title>Producto Borrar</title>
 </head>
 <body>
@@ -12,6 +9,5 @@
         ¿Estas seguro que deseas borrar el producto "{{object}}"?
         <input type="submit" value="Borrar" />
     </form>
-
 </body>
-</html>
+{% endblock %}
