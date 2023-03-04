@@ -47,6 +47,7 @@
                     <div class="text-center">
                         <form method="post">{% csrf_token %}
                             {{ form.as_p }}
+                            <a href="{% url 'List' %}">Regresar</a>
                             <input type="submit" value="Enviar" />
                         </form>
                     </div>
